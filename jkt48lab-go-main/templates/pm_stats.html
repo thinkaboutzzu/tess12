@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+            href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+            rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+            href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap"
+            rel="stylesheet"
+    />
+    <style>
+        body {
+            font-family: "Raleway", sans-serif;
+        }
+    </style>
+</head>
+<body>
+<section class="w-full max-w-screen-sm mx-auto text-white p-5">
+    <div
+            class="flex justify-between items-center bg-black/95 px-5 py-2 rounded-2xl"
+    >
+        <div>
+            <img
+                    src="https://jkt48.safatanc.com/logo/jkt48lab_white.png"
+                    alt=""
+                    class="w-16"
+            />
+        </div>
+        <div>
+            <h1 class="text-2xl font-bold">PM Stats {{.Type}} Update</h1>
+        </div>
+    </div>
+
+    <div class="mt-2">
+        <div
+                class="bg-black/95 rounded-t-2xl px-5 py-2 flex justify-between items-center"
+        >
+            <div class="flex h-max">
+                <div
+                        class="flex items-center text-xs pl-3 pr-2 rounded-l-2xl bg-red-600"
+                >
+                    TOP {{ len .Ranks }}
+                </div>
+                <div
+                        class="flex items-center text-sm pl-2 pr-3 rounded-r-2xl bg-red-200 text-red-600 font-bold"
+                >
+                    Point
+                </div>
+            </div>
+            <div>
+                <span class="text-xs text-white/80">{{.From}} - {{.Until}}</span>
+            </div>
+        </div>
+        <div class="bg-zinc-900 rounded-b-2xl px-5 py-1">
+            <span>Pengurutan berdasarkan point</span>
+            <span class="text-xs"
+            >(text 1 point, image 2 point, voice 3 point).</span
+            >
+            <div class="grid grid-cols-2 gap-2 justify-between pb-5 mt-2">
+                {{range $i, $member := .Ranks}}
+                <div class="bg-black/95 rounded-2xl w-full pb-2">
+                    <div class="flex items-center gap-2">
+                        <div class="rounded-full bg-red-600 w-8 h-8 flex items-center">
+                            <div class="w-full text-center text-xl font-bold">{{ len (printf "a%*s" $i "") }}</div>
+                        </div>
+                        <div>
+                            <h1 class="font-bold">{{$member.Name}}</h1>
+                        </div>
+                    </div>
+                    <div
+                            class="grid grid-cols-2 justify-between text-xs pl-10 text-white/80"
+                    >
+                        <div class="flex items-center gap-1">
+                            <i class="bx bx-message-square text-lg"></i>
+                            <span>{{$member.Count}} total</span>
+                        </div>
+                        <div class="flex items-center gap-1">
+                            <i class="bx bx-message-square-dots text-lg"></i>
+                            <span>{{$member.TextCount}} text</span>
+                        </div>
+                        <div class="flex items-center gap-1">
+                            <i class="bx bx-image-alt text-lg"></i>
+                            <span>{{$member.ImageCount}} image</span>
+                        </div>
+                        <div class="flex items-center gap-1">
+                            <i class="bx bx-microphone text-lg"></i>
+                            <span>{{$member.VoiceCount}} voice</span>
+                        </div>
+                        <div class="flex items-center gap-1 text-yellow-300">
+                            <i class="bx bx-chevrons-up text-lg"></i>
+                            <span>{{$member.Points}} points</span>
+                        </div>
+                    </div>
+                </div>
+                {{end}}
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>
